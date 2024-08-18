@@ -12,9 +12,27 @@ struct  MainDoctorView: View {
     @State private var searchText = ""
     @State private var isArrowUp = false
     @StateObject var contenVM = DoctorsVM()
-    @State var selectionPage: String = ""
+    @State var selectionPage: String = "house.fill"
+    @State private var isRatingUp = false
+    
+    
     
     private var networManager: NetworkProtocol = NetworkService()
+    
+    init() {
+        UITabBar.appearance().isHidden = true
+    }
+    
+    var filterDoctor: [Users] {
+        if searchText.isEmpty {
+            return contenVM.doctorsDataArray
+        } else {
+            
+            return contenVM.doctorsDataArray.filter{
+                $0.first_name?.localizedCaseInsensitiveContains(searchText) == true
+            }
+        }
+    }
     
     var body: some View {
         ZStack(alignment: .bottom) {
@@ -25,6 +43,7 @@ struct  MainDoctorView: View {
                             HStack(spacing: 0){
                                 Button {
                                     self.isArrowUp.toggle()
+                                    print("по цене")
                                 } label: {
                                     HStack{
                                         Text("По цене")
@@ -43,8 +62,13 @@ struct  MainDoctorView: View {
                                 .clipShape(.rect(cornerRadius: 5))
                                 
                                 
-                                Elements.makeBtn(text: "По стажу", action: print("btn pressed"))
-                                Elements.makeBtn(text: "По рейтингу", action: print("btn "))
+                                CustomSortBtn(text: "По стажу", action: {
+                                }, backgroundColor: .white, textColor: .myLightGray, cornerRadius: 5)
+                                CustomSortBtn(text: "По рейтингу", action: {
+                                    toggleSingLessMore(doctors: contenVM, turn: isRatingUp)
+                                    isRatingUp.toggle()
+                                    
+                                }, backgroundColor: .white, textColor: .myLightGray, cornerRadius: 5)
                                 
                             }
                             .frame(maxWidth: .infinity)
@@ -54,12 +78,6 @@ struct  MainDoctorView: View {
                         .frame(maxWidth: .infinity, alignment: .topLeading)
                         .navigationTitle("Педиатры")
                         
-                        //            .toolbar {
-                        //                ToolbarItem(placement: .principal) {
-                        //                    Text("Педиатры")
-                        //                        .font(.system(size: 24, weight: .light))
-                        //                }
-                        //            }
                         .padding(.horizontal, 20)
                         
                         .onAppear{
@@ -67,7 +85,7 @@ struct  MainDoctorView: View {
                         }
                         ScrollView {
                             LazyVStack(spacing: 20) { // Задаем отступы между ячейками
-                                ForEach(contenVM.doctorsDataArray.indices, id: \.self) { index in
+                                ForEach(filterDoctor.indices, id: \.self) { index in
                                     VStack {
                                         DoctorItem(item: $contenVM.doctorsDataArray[index])
                                     }
@@ -86,54 +104,45 @@ struct  MainDoctorView: View {
                 }
                 .tabItem {
                 }
-                .tag("home")
+                .tag("house.fill")
+                ProfilePage(selectedTag: $selectionPage)
+                    .tag("person.fill")
+                MessagePage(selectedTag: $selectionPage)
+                    .tag("message.fill")
+                AppointmentPage(selectedTag: $selectionPage)
+                    .tag("calendar")
+                    
             }
             HStack {
-                VStack {
-                    Button {
-                        //
-                    } label: {
-                        Image(.houseTabBar)
-                    }
-                    Text("Главная")
-                        .foregroundStyle(.myPink)
+                ForEach(contenVM.arrayTabView) { page in
+                    Spacer()
+                    TabViewItem(selectionPage: $selectionPage, page: page)
+                    Spacer()
+                    
                 }
-                VStack {
-                    Button {
-                        //
-                    } label: {
-                        Image(.houseTabBar)
-                    }
-                    Text("Главная")
-                        .foregroundStyle(.myPink)
-                }
-                VStack {
-                    Button {
-                        //
-                    } label: {
-                        Image(.houseTabBar)
-                    }
-                    Text("Главная")
-                        .foregroundStyle(.myPink)
-                }
-                VStack {
-                    Button {
-                        //
-                    } label: {
-                        Image(.houseTabBar)
-                    }
-                    Text("Главная")
-                        .foregroundStyle(.myPink)
-                }
-
             }
-            .padding(.bottom, 15)
-
+            .padding(.bottom, 25)
+            .padding(.top, 15)
+            .background(.white)
+            
         }
         .frame(maxWidth: .infinity, maxHeight: .infinity)
         .ignoresSafeArea()
-       
-
+        
+        
+    }
+    
+    
+    func toggleSingLessMore(doctors: DoctorsVM, turn: Bool) {
+        if turn {
+            return doctors.doctorsDataArray.sort {
+                $0.ratings_rating ?? 0 > $1.ratings_rating ?? 0
+            }
+        } else {
+            return doctors.doctorsDataArray.sort {
+                $0.ratings_rating ?? 0 < $1.ratings_rating ?? 0
+            }
+        }
     }
 }
 

@@ -42,3 +42,29 @@ class Elements {
         .padding(.bottom, 16)
     }
 }
+struct CustomSortBtn: View {
+    
+    var text: String
+    var action: () -> Void
+    var backgroundColor: Color
+    var textColor: Color
+    var cornerRadius: CGFloat
+    
+    var body: some View {
+        
+        Button(action: action){
+            Text(text)
+                .font(.system(size: 14, weight: .semibold))
+                .foregroundStyle(.gray)
+                .frame(maxWidth: .infinity, maxHeight: 32)
+                .padding(.horizontal, 10)
+                .background(.white)
+                .clipped()
+                .overlay {
+                    RoundedRectangle(cornerRadius: 5)
+                        .stroke(.myLightGray, lineWidth: 1)
+                }
+        }
+        
+    }
+}

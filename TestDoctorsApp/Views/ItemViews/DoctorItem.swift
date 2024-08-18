@@ -117,7 +117,7 @@ struct DoctorItem: View {
             }
             .frame(alignment: .top)
             .padding(.top, 16)
-            Elements.makeAppointmentBtn(isHaveAppointment: !item.free_reception_time.isEmpty, action: print("Apointment btn"))
+            Elements.makeAppointmentBtn(isHaveAppointment: !item.free_reception_time.isEmpty, action: ())
                 .buttonStyle(PlainButtonStyle())
 
         }
