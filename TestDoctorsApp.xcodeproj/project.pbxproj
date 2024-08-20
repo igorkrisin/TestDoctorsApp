@@ -21,6 +21,8 @@
 		C5DEF22E2C7220F100675125 /* ProfilePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DEF22D2C7220F100675125 /* ProfilePage.swift */; };
 		C5DEF2302C7224C400675125 /* TabViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DEF22F2C7224C400675125 /* TabViewItem.swift */; };
 		C5DEF2322C726EB700675125 /* DoctorCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DEF2312C726EB700675125 /* DoctorCardView.swift */; };
+		C5DEF2342C73B8C000675125 /* DataJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DEF2332C73B8C000675125 /* DataJson.swift */; };
+		C5DEF2362C73B96A00675125 /* DataJsonFile.json in Resources */ = {isa = PBXBuildFile; fileRef = C5DEF2352C73B96A00675125 /* DataJsonFile.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,6 +41,8 @@
 		C5DEF22D2C7220F100675125 /* ProfilePage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfilePage.swift; sourceTree = "<group>"; };
 		C5DEF22F2C7224C400675125 /* TabViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabViewItem.swift; sourceTree = "<group>"; };
 		C5DEF2312C726EB700675125 /* DoctorCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorCardView.swift; sourceTree = "<group>"; };
+		C5DEF2332C73B8C000675125 /* DataJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataJson.swift; sourceTree = "<group>"; };
+		C5DEF2352C73B96A00675125 /* DataJsonFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataJsonFile.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -149,6 +153,8 @@
 			isa = PBXGroup;
 			children = (
 				C51FA7EA2C708777009EFBC1 /* NetworkService.swift */,
+				C5DEF2332C73B8C000675125 /* DataJson.swift */,
+				C5DEF2352C73B96A00675125 /* DataJsonFile.json */,
 			);
 			path = Service;
 			sourceTree = "<group>";
@@ -213,6 +219,7 @@
 			files = (
 				C51FA7D32C6FC093009EFBC1 /* Preview Assets.xcassets in Resources */,
 				C51FA7D02C6FC093009EFBC1 /* Assets.xcassets in Resources */,
+				C5DEF2362C73B96A00675125 /* DataJsonFile.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -229,6 +236,7 @@
 				C5DEF22C2C7220CD00675125 /* MessagePage.swift in Sources */,
 				C51FA7CC2C6FC091009EFBC1 /* TestDoctorsAppApp.swift in Sources */,
 				C51FA7E82C7086B5009EFBC1 /* DoctorsVM.swift in Sources */,
+				C5DEF2342C73B8C000675125 /* DataJson.swift in Sources */,
 				C5DEF22A2C72209900675125 /* AppointmentPage.swift in Sources */,
 				C51FA7E62C6FE8CF009EFBC1 /* DoctorModels.swift in Sources */,
 				C51FA7E02C6FDE81009EFBC1 /* Elements.swift in Sources */,

@@ -8,24 +8,14 @@
 import SwiftUI
 
 struct DoctorItem: View {
-    
-    var jobTitle = "Педиатор"
-    var price = 600
-    var isHaveAppointment: Bool = false
+
     @Binding var item: Users
-    
-    
-    
-    var expirience = 12
-    
+    @StateObject var contenVM = DoctorsVM()
+
     var body: some View {
         VStack(spacing: 15) {
             HStack(alignment: .top) {
                 HStack(alignment: .top, spacing: 16){
-//                    Image(.car)
-//                        .resizable()
-//                        .frame(width: 50, height: 50)
-//                        .clipShape(.circle)
                     if let urlString = item.avatar, let url = URL(string: urlString) {
                         AsyncImage(url: url) { image in
                             image
@@ -59,7 +49,7 @@ struct DoctorItem: View {
                         }
                         
                         HStack {
-                            if let ratings = item.ratings_rating , ratings <= 5 {
+                            if let ratings = item.ratings_rating , floor(ratings) <= 5 {
                                 ForEach(0..<Int(ratings), id: \.self) { _ in
                                     
                                     Image(.orangeStar)
@@ -84,17 +74,14 @@ struct DoctorItem: View {
                                 Text("")
                                     .foregroundStyle(.grayText)
                             } else if item.specialization.isEmpty {
-                                Text("стаж \(dateExpirience(workExp: item.work_expirience)) лет")
+                                Text("стаж \(contenVM.dateExpirience(workExp: item.work_expirience)) лет")
                                     .foregroundStyle(.grayText)
                             } else {
-                                Text("\(giveSpecialization(specializationArr: item.specialization)) • стаж \(dateExpirience(workExp: item.work_expirience)) лет")
+                                Text("\(contenVM.giveSpecialization(specializationArr: item.specialization)) • стаж \(contenVM.dateExpirience(workExp: item.work_expirience)) лет")
                                     .foregroundStyle(.grayText)
-                                
                             }
-                           
-                            
                         }
-                        Text("от \(lessPrise(users: item)) ₽")
+                        Text("от \(contenVM.lessPrise(users: item)) ₽")
                             .font(.system(size: 16, weight: .semibold))
                         
                     }
@@ -125,39 +112,9 @@ struct DoctorItem: View {
         .padding(.horizontal, 16)
     }
     
-    func dateExpirience(workExp: [WorkExp?]) -> Int {
-        var summ = 0
-        for date in workExp {
-            
-            guard let date = date, let startDate = date.start_date, let endDate = date.end_date else { return 0 }
-            summ += endDate - startDate
-        }
-        return summ / 31556925
-    }
     
-    func giveSpecialization(specializationArr: [Specialization?]) -> String {
-        for specialization in specializationArr {
-            guard let spepecialization = specialization?.name else { return ""}
-            return spepecialization
-        }
-        return ""
-    }
     
-    func lessPrise(users: Users) -> Int {
-       
-        guard let videoPrice = users.video_chat_price, let chatPrice = users.text_chat_price, let hospitalPrise = users.home_price else { return 0}
-        let priceArray: [Int] = [chatPrice, hospitalPrise]
-        var lessPrice = videoPrice
-        
-        for price in priceArray {
-            if price < lessPrice {
-                lessPrice = price
-            }
-        }
-        
-        return lessPrice
-    }
-    
+   
 }
 
 

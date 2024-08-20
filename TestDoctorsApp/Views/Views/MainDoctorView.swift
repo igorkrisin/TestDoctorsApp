@@ -14,6 +14,9 @@ struct  MainDoctorView: View {
     @StateObject var contenVM = DoctorsVM()
     @State var selectionPage: String = "house.fill"
     @State private var isRatingUp = false
+    @State private var isPriceUp = false
+    @State private var isExpipienceUp = false
+    @State private var selectOption: SortOption? = nil
     
     
     
@@ -41,34 +44,33 @@ struct  MainDoctorView: View {
                     VStack {
                         VStack{
                             HStack(spacing: 0){
-                                Button {
-                                    self.isArrowUp.toggle()
-                                    print("по цене")
-                                } label: {
-                                    HStack{
-                                        Text("По цене")
-                                            .font(.system(size: 14, weight: .semibold))
-                                        
-                                        Image(systemName: isArrowUp ? "arrow.up" : "arrow.down")
-                                            .resizable()
-                                            .frame(maxWidth: 10, maxHeight: 10)
-                                    }
-                                }
-                                //.padding()
-                                .frame(maxWidth: .infinity, maxHeight: 32)
-                                .foregroundStyle(.white)
-                                .padding(.horizontal, 10)
-                                .background(.myPink)
-                                .clipShape(.rect(cornerRadius: 5))
-                                
-                                
-                                CustomSortBtn(text: "По стажу", action: {
-                                }, backgroundColor: .white, textColor: .myLightGray, cornerRadius: 5)
-                                CustomSortBtn(text: "По рейтингу", action: {
-                                    toggleSingLessMore(doctors: contenVM, turn: isRatingUp)
+                                CustomSortBtn(text: "По цене", backgroundColor: .white, textColor: .myLightGray, cornerRadius: 5, sortOption: .price, selectOption: selectOption, isArrowUp: isArrowUp,  action: {
+                                    
+                                    isArrowUp.toggle()
+                                    selectOption = .price
+                                    contenVM.toggleSort(in: &contenVM.doctorsDataArray, by: \Users.ratings_rating, ascending: isRatingUp)
                                     isRatingUp.toggle()
                                     
-                                }, backgroundColor: .white, textColor: .myLightGray, cornerRadius: 5)
+                                })
+                                
+                                CustomSortBtn(text: "По стажу", backgroundColor: .white, textColor: .myLightGray, cornerRadius: 5, sortOption: .expirience, selectOption: selectOption, isArrowUp: isArrowUp,  action: {
+                                    
+                                    isArrowUp.toggle()
+                                    selectOption = .expirience
+                                    contenVM.toggleSort(in: &contenVM.doctorsDataArray, by: \Users.ratings_rating, ascending: isRatingUp)
+                                    isRatingUp.toggle()
+                                    
+                                })
+                                
+                                
+                                CustomSortBtn(text: "По рейтингу", backgroundColor: .white, textColor: .myLightGray, cornerRadius: 5, sortOption: .rating, selectOption: selectOption, isArrowUp: isArrowUp,  action: {
+                                    //                                    toggleSingLessMore(doctors: contenVM, turn: isRatingUp)
+                                    isArrowUp.toggle()
+                                    selectOption = .rating
+                                    contenVM.toggleSort(in: &contenVM.doctorsDataArray, by: \Users.ratings_rating, ascending: isRatingUp)
+                                    isRatingUp.toggle()
+                                    
+                                })
                                 
                             }
                             .frame(maxWidth: .infinity)
@@ -81,7 +83,8 @@ struct  MainDoctorView: View {
                         .padding(.horizontal, 20)
                         
                         .onAppear{
-                            contenVM.getData()
+                            contenVM.getJsonData()
+                            
                         }
                         ScrollView {
                             LazyVStack(spacing: 20) { // Задаем отступы между ячейками
@@ -111,7 +114,7 @@ struct  MainDoctorView: View {
                     .tag("message.fill")
                 AppointmentPage(selectedTag: $selectionPage)
                     .tag("calendar")
-                    
+                
             }
             HStack {
                 ForEach(contenVM.arrayTabView) { page in
@@ -132,19 +135,8 @@ struct  MainDoctorView: View {
         
     }
     
-    
-    func toggleSingLessMore(doctors: DoctorsVM, turn: Bool) {
-        if turn {
-            return doctors.doctorsDataArray.sort {
-                $0.ratings_rating ?? 0 > $1.ratings_rating ?? 0
-            }
-        } else {
-            return doctors.doctorsDataArray.sort {
-                $0.ratings_rating ?? 0 < $1.ratings_rating ?? 0
-            }
-        }
-    }
 }
+
 
 #Preview {
     MainDoctorView()

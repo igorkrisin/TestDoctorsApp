@@ -29,7 +29,7 @@ struct Users: Identifiable, Decodable {
     var is_favorite: Bool?
     let avatar: String?
     let scientific_degree_label: String?//ученая степень
-    let work_expirience: [WorkExp?]
+    var work_expirience: [WorkExp?]
     let specialization: [Specialization?]
     let ratings_rating: Float?
     let free_reception_time: [ReceptionTime?]

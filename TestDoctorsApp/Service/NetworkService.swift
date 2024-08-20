@@ -85,6 +85,25 @@ class NetworkService: NetworkProtocol {
         }
     }
     
+
+
+    func loadUsersFromJSON() -> DoctorModels? {
+        guard let url = Bundle.main.url(forResource: "DataJsonFile", withExtension: "json") else {
+            print("Failed to locate users.json in bundle.")
+            return nil
+        }
+        
+        do {
+            let data = try Data(contentsOf: url)
+            let decoder = JSONDecoder()
+            let users = try decoder.decode(DoctorModels.self, from: data)
+            return users
+        } catch {
+            print("Failed to load or decode JSON: \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
     //3 ren request
     
 }
