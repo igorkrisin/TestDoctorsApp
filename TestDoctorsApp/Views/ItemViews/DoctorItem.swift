@@ -90,10 +90,17 @@ struct DoctorItem: View {
                 Button {
                     item.is_favorite?.toggle()
                 } label: {
-                        Image(systemName: "heart")
+                    if item.is_favorite! {
+                        Image(systemName: "heart.fill")
                            .resizable()
                            .frame(width: 20, height: 17.1)
-                           .foregroundStyle(item.is_favorite ?? false ? .myPink : .myLightGray)
+                           .foregroundStyle(.myPink)
+                    } else {
+                        Image(systemName: "heart")
+                            .resizable()
+                            .frame(width: 20, height: 17.1)
+                            .foregroundStyle(.gray)
+                    }
                 }
                 .buttonStyle(PlainButtonStyle())
 
