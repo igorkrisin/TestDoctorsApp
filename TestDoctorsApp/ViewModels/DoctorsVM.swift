@@ -11,6 +11,7 @@ class DoctorsVM: ObservableObject {
     @Published var doctorsDataArray: [Users] = []
     @Published var arrayTabView: [PageItem] = PageItem.pages()
     
+    
    
     private let networkManager = NetworkService()
     

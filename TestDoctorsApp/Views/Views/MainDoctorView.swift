@@ -20,6 +20,7 @@ struct  MainDoctorView: View {
     
     
     
+    
     private var networManager: NetworkProtocol = NetworkService()
     
     init() {
@@ -32,6 +33,7 @@ struct  MainDoctorView: View {
         } else {
             
             return contenVM.doctorsDataArray.filter{
+                
                 $0.first_name?.contains(searchText) == true
             }
         }
@@ -87,14 +89,16 @@ struct  MainDoctorView: View {
                             
                         }
                         ScrollView {
-                            LazyVStack(spacing: 20) { // Задаем отступы между ячейками
+                            LazyVStack(spacing: 20) {
                                 ForEach(filterDoctor.indices, id: \.self) { index in
-                                    VStack {
-                                        DoctorItem(item: $contenVM.doctorsDataArray[index])
+                                    if let originalIndex = contenVM.doctorsDataArray.firstIndex(where: { $0.id == filterDoctor[index].id }) {
+                                        VStack {
+                                            DoctorItem(item: $contenVM.doctorsDataArray[originalIndex])
+                                        }
+                                        .background(Color.white) // Устанавливаем фоновый цвет для ячейки
+                                        .cornerRadius(8) // Добавляем скругление углов ячейки
+                                        .padding(.horizontal) // Добавляем горизонтальные отступы для ячейки
                                     }
-                                    .background(Color.white) // Устанавливаем фоновый цвет для ячейки
-                                    .cornerRadius(8) // Добавляем скругление углов ячейки
-                                    .padding(.horizontal) // Добавляем горизонтальные отступы для ячейки
                                 }
                             }
                             .padding(.vertical, 20) // Отступы сверху и снизу для всего LazyVStack
