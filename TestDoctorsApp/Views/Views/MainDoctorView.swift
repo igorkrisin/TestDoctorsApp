@@ -32,7 +32,7 @@ struct  MainDoctorView: View {
         } else {
             
             return contenVM.doctorsDataArray.filter{
-                $0.first_name?.localizedCaseInsensitiveContains(searchText) == true
+                $0.first_name?.contains(searchText) == true
             }
         }
     }
@@ -48,8 +48,8 @@ struct  MainDoctorView: View {
                                     
                                     isArrowUp.toggle()
                                     selectOption = .price
-                                    contenVM.toggleSort(in: &contenVM.doctorsDataArray, by: \Users.ratings_rating, ascending: isRatingUp)
-                                    isRatingUp.toggle()
+                                    contenVM.sortByprice(doctors: contenVM, turn: isPriceUp)
+                                    isPriceUp.toggle()
                                     
                                 })
                                 
@@ -57,8 +57,8 @@ struct  MainDoctorView: View {
                                     
                                     isArrowUp.toggle()
                                     selectOption = .expirience
-                                    contenVM.toggleSort(in: &contenVM.doctorsDataArray, by: \Users.ratings_rating, ascending: isRatingUp)
-                                    isRatingUp.toggle()
+                                    contenVM.sortByExpirience(doctors: contenVM, turn: isExpipienceUp)
+                                    isExpipienceUp.toggle()
                                     
                                 })
                                 
@@ -76,7 +76,7 @@ struct  MainDoctorView: View {
                             .frame(maxWidth: .infinity)
                             
                         }
-                        .searchable(text: $searchText, prompt: "Поиск")
+                        
                         .frame(maxWidth: .infinity, alignment: .topLeading)
                         .navigationTitle("Педиатры")
                         
@@ -98,13 +98,16 @@ struct  MainDoctorView: View {
                                 }
                             }
                             .padding(.vertical, 20) // Отступы сверху и снизу для всего LazyVStack
+                           
                         }
                         .background(Color(.myLightGray)) // Общий фон для ScrollView
+                        
                         
                         
                     }
                     .background(.myLightGray)
                 }
+                .searchable(text: $searchText, prompt: "Поиск")
                 .tabItem {
                 }
                 .tag("house.fill")

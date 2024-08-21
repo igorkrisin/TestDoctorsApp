@@ -23,6 +23,7 @@
 		C5DEF2322C726EB700675125 /* DoctorCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DEF2312C726EB700675125 /* DoctorCardView.swift */; };
 		C5DEF2342C73B8C000675125 /* DataJson.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DEF2332C73B8C000675125 /* DataJson.swift */; };
 		C5DEF2362C73B96A00675125 /* DataJsonFile.json in Resources */ = {isa = PBXBuildFile; fileRef = C5DEF2352C73B96A00675125 /* DataJsonFile.json */; };
+		C5DEF2382C76810700675125 /* AppointmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C5DEF2372C76810700675125 /* AppointmentView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -43,6 +44,7 @@
 		C5DEF2312C726EB700675125 /* DoctorCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoctorCardView.swift; sourceTree = "<group>"; };
 		C5DEF2332C73B8C000675125 /* DataJson.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataJson.swift; sourceTree = "<group>"; };
 		C5DEF2352C73B96A00675125 /* DataJsonFile.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DataJsonFile.json; sourceTree = "<group>"; };
+		C5DEF2372C76810700675125 /* AppointmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppointmentView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 				C5DEF22B2C7220CD00675125 /* MessagePage.swift */,
 				C5DEF2292C72209900675125 /* AppointmentPage.swift */,
 				C5DEF2312C726EB700675125 /* DoctorCardView.swift */,
+				C5DEF2372C76810700675125 /* AppointmentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 				C51FA7E02C6FDE81009EFBC1 /* Elements.swift in Sources */,
 				C5DEF2302C7224C400675125 /* TabViewItem.swift in Sources */,
 				C51FA7EB2C708777009EFBC1 /* NetworkService.swift in Sources */,
+				C5DEF2382C76810700675125 /* AppointmentView.swift in Sources */,
 				C5DEF2322C726EB700675125 /* DoctorCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

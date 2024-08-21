@@ -35,17 +35,40 @@ class Elements {
     
     static func makeAppointmentBtn (isHaveAppointment: Bool, action:  ()) -> some View {
         Button {
-            isHaveAppointment ? action : ()
+            
+            print(111)
         } label: {
             isHaveAppointment ? Text("Записаться") : Text("Нет свободного расписания")
         }
         .frame(maxWidth: .infinity)
         .frame(height: 47)
-        .background(isHaveAppointment ? .myPink : .myLightGray)
+        .background(isHaveAppointment ? .myPink : .bordingGray)
         .foregroundColor( isHaveAppointment ? .white : .black)
         .font(.system(size: 16, weight: .semibold))
         .clipShape(.rect(cornerRadius: 8))
         .padding(.bottom, 16)
+    }
+    
+    static func createPriceHstack(leftV: String, rightV: String, weightFont: Font.Weight = .regular) -> some View {
+        
+        VStack{
+            HStack {
+                Text(leftV)
+                Spacer()
+                Text("от \(rightV) ₽")
+            }
+            .font(.system(size: 16, weight: weightFont))
+            .padding(16)
+            .frame(height: 60)
+        }
+        .background(.white)
+        .frame(maxWidth: .infinity)
+        .clipShape(.rect(cornerRadius: 8))
+        
+        .overlay(
+            RoundedRectangle(cornerRadius: 8)
+                .stroke(Color.bordingGray, lineWidth: 1)
+        )
     }
 }
 struct CustomSortBtn: View {
@@ -89,4 +112,6 @@ struct CustomSortBtn: View {
         
         
     }
+    
+    
 }

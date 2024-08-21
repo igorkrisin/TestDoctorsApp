@@ -30,9 +30,9 @@ class DoctorsVM: ObservableObject {
         }
     }
     
-     func dateExpirience(workExp: [WorkExp?]) -> Int {
+     func dateExpirience(users: Users) -> Int {
         var summ = 0
-        for date in workExp {
+         for date in users.work_expirience {
             
             guard let date = date, let startDate = date.start_date, let endDate = date.end_date else { return 0 }
             summ += endDate - startDate
@@ -40,30 +40,29 @@ class DoctorsVM: ObservableObject {
         return summ / 31556925
     }
     
-    func giveSpecialization(specializationArr: [Specialization?]) -> String {
-        for specialization in specializationArr {
-            guard let spepecialization = specialization?.name else { return ""}
-            return spepecialization
+    func giveSpecialization(user: Users) -> String {
+        if user.specialization.isEmpty {
+            return "Cпециализаяция не указана"
         }
-        return ""
+        
+        var summSpecialization: String = ""
+        for specialization in user.specialization {
+            
+            guard let specialization = specialization else { return ""}
+            summSpecialization += " \(specialization.name ?? "")"
+        }
+        
+        return summSpecialization
     }
     
     func lessPrise(users: Users) -> Int {
        
         guard let videoPrice = users.video_chat_price, let chatPrice = users.text_chat_price, let hospitalPrise = users.home_price else { return 0}
-        let priceArray: [Int] = [chatPrice, hospitalPrise]
-        var lessPrice = videoPrice
         
-        for price in priceArray {
-            if price < lessPrice {
-                lessPrice = price
-            }
-        }
-        
-        return lessPrice
+        return min(videoPrice, chatPrice, hospitalPrise)
     }
     
-    func toggleSingLessMore(doctors: DoctorsVM, turn: Bool) {
+    func sortByRating(doctors: DoctorsVM, turn: Bool) {
         if turn {
             return doctors.doctorsDataArray.sort {
                 $0.ratings_rating ?? 0 > $1.ratings_rating ?? 0
@@ -72,6 +71,40 @@ class DoctorsVM: ObservableObject {
             return doctors.doctorsDataArray.sort {
                 $0.ratings_rating ?? 0 < $1.ratings_rating ?? 0
             }
+        }
+    }
+    
+    func sortByExpirience(doctors: DoctorsVM, turn: Bool) {
+        if turn {
+            print(1)
+            return doctors.doctorsDataArray.sort {
+                dateExpirience(users:  $0) >  dateExpirience(users:  $1)
+                
+            }
+        } else {
+            print(2)
+            return doctors.doctorsDataArray.sort {
+                dateExpirience(users:  $0) <  dateExpirience(users:  $1)
+                
+            }
+            
+        }
+    }
+    
+    func sortByprice(doctors: DoctorsVM, turn: Bool) {
+        if turn {
+            print(1)
+            return doctors.doctorsDataArray.sort {
+                lessPrise(users:  $0) >  lessPrise(users:  $1)
+                
+            }
+        } else {
+            print(2)
+            return doctors.doctorsDataArray.sort {
+                lessPrise(users:  $0) <  lessPrise(users:  $1)
+                
+            }
+            
         }
     }
     
@@ -84,6 +117,23 @@ class DoctorsVM: ObservableObject {
             }
             return ascending ? firstValue < secondValue : firstValue > secondValue
         }
+    }
+    
+    func giveEducationTypeLabel(users: Users) -> String {
+        
+        var summEducation: String = ""
+        if users.higher_education.isEmpty {
+            return "Учебное заведение не указано"
+        }
+        for education in users.higher_education {
+            if let higherEducation = education?.university {
+                summEducation += " \(higherEducation)"
+            }
+            
+        }
+        
+        
+        return summEducation
     }
     
 }

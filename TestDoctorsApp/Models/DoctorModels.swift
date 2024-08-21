@@ -21,13 +21,13 @@ struct DoctorData: Decodable {
 
 struct Users: Identifiable, Decodable {
     let id: String
-    let first_name: String?
-    let patronymic: String?
-    let last_name: String?
+    var first_name: String?
+    var patronymic: String?
+    var last_name: String?
     let ratings: [Rating?]
     let rank: Int
     var is_favorite: Bool?
-    let avatar: String?
+    var avatar: String?
     let scientific_degree_label: String?//ученая степень
     var work_expirience: [WorkExp?]
     let specialization: [Specialization?]
@@ -37,8 +37,14 @@ struct Users: Identifiable, Decodable {
     let home_price: Int?
     let video_chat_price: Int?
     let text_chat_price: Int?
+    let education_type_label: EducationType?
+    let higher_education: [HigerEducation?]
+   
     
 }
+
+
+
 
 struct Rating: Decodable {
    
@@ -55,6 +61,15 @@ struct Specialization: Decodable {
 }
 
 struct ReceptionTime: Decodable {
-    
+   
+}
+
+
+struct EducationType: Decodable {
+    let name: String?
+}
+
+struct HigerEducation: Decodable {
+    let university: String?
 }
 
