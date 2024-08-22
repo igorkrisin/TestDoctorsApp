@@ -35,8 +35,6 @@ class Elements {
     
     static func makeAppointmentBtn (isHaveAppointment: Bool, action:  ()) -> some View {
         Button {
-            
-            print(111)
         } label: {
             isHaveAppointment ? Text("Записаться") : Text("Нет свободного расписания")
         }

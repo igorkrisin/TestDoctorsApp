@@ -77,13 +77,13 @@ class DoctorsVM: ObservableObject {
     
     func sortByExpirience(doctors: DoctorsVM, turn: Bool) {
         if turn {
-            print(1)
+
             return doctors.doctorsDataArray.sort {
                 dateExpirience(users:  $0) >  dateExpirience(users:  $1)
                 
             }
         } else {
-            print(2)
+  
             return doctors.doctorsDataArray.sort {
                 dateExpirience(users:  $0) <  dateExpirience(users:  $1)
                 
@@ -94,13 +94,11 @@ class DoctorsVM: ObservableObject {
     
     func sortByprice(doctors: DoctorsVM, turn: Bool) {
         if turn {
-            print(1)
             return doctors.doctorsDataArray.sort {
                 lessPrise(users:  $0) >  lessPrise(users:  $1)
                 
             }
         } else {
-            print(2)
             return doctors.doctorsDataArray.sort {
                 lessPrise(users:  $0) <  lessPrise(users:  $1)
                 
