@@ -43,7 +43,7 @@ class DoctorsVM: ObservableObject {
     
     func giveSpecialization(user: Users) -> String {
         if user.specialization.isEmpty {
-            return "Cпециализаяция не указана"
+            return "Не указана"
         }
         
         var summSpecialization: String = ""

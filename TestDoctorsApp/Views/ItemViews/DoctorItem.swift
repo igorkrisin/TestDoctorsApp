@@ -80,27 +80,12 @@ struct DoctorItem: View {
                                     
                                 }
                                 HStack {
-                                    if item.work_expirience.isEmpty && item.work_expirience.isEmpty {
-                                        Text("Не указано • стаж \(contenVM.dateExpirience(users: item)) лет")
-                                            .foregroundStyle(.grayText)
-//                                        Text("Стаж не указан")
-                                        
-                                            .foregroundStyle(.grayText)
-                                    } else if item.specialization.isEmpty  {
-                                        Text("Стаж не указан")
-                                            .foregroundStyle(.grayText)
-                                        
-                                    } else if item.specialization.isEmpty {
-                                        Text("Не указано • стаж \(contenVM.dateExpirience(users: item)) лет")
-                                            .foregroundStyle(.grayText)
-                                        
-                                    } else {
-                                        Text("\(contenVM.giveSpecialization(user:  item)) • стаж \(contenVM.dateExpirience(users: item)) лет")
-                                            .foregroundStyle(.grayText)
-                                            .multilineTextAlignment(.leading)
-                                            .lineLimit(1)
-                                    }
+                                    Text("\(contenVM.giveSpecialization(user:  item))• стаж \(contenVM.dateExpirience(users: item)) лет")
+                                        .multilineTextAlignment(.leading)
+                                        .foregroundStyle(.gray)
+                                    
                                 }
+                                
                                 Text("от \(contenVM.lessPrise(users: item)) ₽")
                                     .font(.system(size: 16, weight: .semibold))
                                 
