@@ -98,10 +98,12 @@ struct  MainDoctorView: View {
                                     }
                                 }
                             }
-                            .padding(.vertical, 20) // Отступы сверху и снизу для всего LazyVStack
+                            .padding(.vertical, 20)
+                            .padding(.bottom, 40)
                            
                         }
-                        .background(Color(.myLightGray)) // Общий фон для ScrollView
+                        .background(Color(.myLightGray))
+                        
                         
                         
                         
