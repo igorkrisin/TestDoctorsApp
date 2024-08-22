@@ -18,10 +18,7 @@ struct  MainDoctorView: View {
     @State private var isExpipienceUp = false
     @State private var selectOption: SortOption? = nil
     
-    
-    
-    
-    private var networManager: NetworkProtocol = NetworkService()
+    private var networManager = DoctorsVM().networkManager
     
     init() {
         UITabBar.appearance().isHidden = true

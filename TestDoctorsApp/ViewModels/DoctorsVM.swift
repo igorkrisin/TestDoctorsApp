@@ -13,7 +13,7 @@ class DoctorsVM: ObservableObject {
     
     
    
-    private let networkManager = NetworkService()
+    let networkManager = NetworkService()
     
     func getJsonData() {
         if let dataArray =  networkManager.loadUsersFromJSON()?.record.data.users{
